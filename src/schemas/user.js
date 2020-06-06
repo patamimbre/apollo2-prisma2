@@ -3,6 +3,8 @@ import { makeExecutableSchema } from 'graphql-tools';
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 
+import { WrongCredentialsError, AuthenticationError } from '../errors';
+
 const typeDefs = gql`
   type User {
     id: ID!
@@ -27,7 +29,7 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     currentUser: (parent, args, { user, prisma }) => {
-      if (!user) throw new Error('Not authenticated')
+      if (!user) throw new AuthenticationError()
       return prisma.user.findOne({ where: { id: user.id } })
     }
   },
@@ -39,10 +41,10 @@ const resolvers = {
     },
     login: async (parent, { username, password }, { prisma }) => {
       const user = await prisma.user.findOne({ where: { username } });
-      if (!user) throw new Error('Invalid username');
+      if (!user) throw new WrongCredentialsError();
 
       const passwordMatch = await argon2.verify(user.password, password);
-      if (!passwordMatch) throw new Error('Invalid password');
+      if (!passwordMatch) throw new WrongCredentialsError();
 
       const token = jwt.sign(
         {
