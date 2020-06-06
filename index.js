@@ -1,6 +1,7 @@
-const { ApolloServer } = require('apollo-server');
-const { schema } = require('./src/schema')
-const { createContext } = require('./src/context') 
+import { ApolloServer } from 'apollo-server';
+import schema from './src/schema'
+import createContext from './src/context'
+
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.

@@ -1,6 +1,5 @@
-const { makeExecutableSchema } = require('graphql-tools')
-const { gql } = require('apollo-server');
-const { Context } = require('./context')
+import { makeExecutableSchema } from 'graphql-tools'
+import { gql } from 'apollo-server'
 
 const typeDefs = gql`
   # This "Book" type defines the queryable fields for every book in our data source.
@@ -40,6 +39,4 @@ const schema = makeExecutableSchema({
   typeDefs,
 })
 
-module.exports = {
-  schema
-}
+export default schema;
