@@ -1,21 +1,6 @@
 import { ApolloServer } from 'apollo-server';
-import schema from './src/schema'
-import context, { prisma } from './src/context'
-import jwt from 'jsonwebtoken';
-
-import dotenv from 'dotenv';
-dotenv.config();
-
-const getUserFromJWT = (bearer='') => {
-  try {
-    const token = bearer.split(' ')[1]
-    if (token) return jwt.verify(token, process.env.JWT_SECRET)
-    return null
-  } catch (error) {
-    return null
-  }
-}
-
+import schema from './src/schemas'
+import context from './src/context'
 
 const server = new ApolloServer({
   schema,
