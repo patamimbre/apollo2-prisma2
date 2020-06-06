@@ -6,6 +6,7 @@ const typeDefs = gql`
     id: ID!
     author: String!
     title: String!
+    note: String
   }
 
   type Query {
@@ -13,7 +14,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    addBook(title: String!, author: String!): Book!
+    addBook(title: String!, author: String!, note: String): Book!
   }
 `;
 
