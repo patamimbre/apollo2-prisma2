@@ -1,6 +1,6 @@
 import { ApolloServer } from 'apollo-server';
 import schema from './src/schema'
-import { prisma } from './src/context'
+import context, { prisma } from './src/context'
 import jwt from 'jsonwebtoken';
 
 import dotenv from 'dotenv';
@@ -17,14 +17,9 @@ const getUserFromJWT = (bearer='') => {
 }
 
 
-// The ApolloServer constructor requires two parameters: your schema
-// definition and your set of resolvers.
 const server = new ApolloServer({
   schema,
-  context: ({ req }) => {
-    const user = getUserFromJWT(req.headers.authorization);
-    return { user, prisma };
-  },
+  context,
 });
 
 // The `listen` method launches a web server.
