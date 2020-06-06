@@ -15,15 +15,24 @@ const typeDefs = gql`
   type Query {
     books: [Book]
   }
+
+  type Mutation {
+    addBook(title: String!, author: String!): Book!
+  }
 `;
 
 const resolvers = {
   Query: {
-    books: (parent, args, ctx) => {
-      console.log(ctx)
-      return ctx.prisma.book.findMany()
-    },
+    books: (parent, args, ctx) => ctx.prisma.book.findMany(),
   },
+  Mutation: {
+    addBook: (parent, args, ctx) => ctx.prisma.book.create({
+      data: {
+        title: args.title,
+        author: args.author,
+      },
+    })
+  }
 };
 
 const schema = makeExecutableSchema({
