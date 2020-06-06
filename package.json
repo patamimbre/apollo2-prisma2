@@ -4,13 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "migrate:save": "npx prisma migrate save --experimental",
+    "migrate:up": "npx prisma migrate up --experimental",
+    "generate": "npx prisma generate"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "2.0.0-beta.8",
     "apollo-server": "^2.14.2",
     "graphql": "^15.0.0"
+  },
+  "devDependencies": {
+    "@prisma/cli": "2.0.0-beta.8"
   }
 }
