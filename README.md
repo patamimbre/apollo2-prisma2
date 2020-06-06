@@ -9,17 +9,17 @@
 ## 03 - Authentication
 - [Documentation](https://www.prisma.io/tutorials/authentication-in-apollo-server-ct21)
 
-## Custom scalars and enums
+## Custom scalars and enums
 - [Documentation](https://www.apollographql.com/docs/apollo-server/schema/scalars-enums/)
 
 
-## Error handling
+## Error handling
 - [Documentation](https://www.apollographql.com/docs/apollo-server/data/errors/)
 - [Better approach](https://dev.to/andre/handling-errors-in-graphql--2ea3)
 - [Apollo errors package](https://github.com/boltsource/apollo-errors)
 
 
-## File uploads
+## File uploads
 - [Documentation](https://www.apollographql.com/docs/apollo-server/data/file-uploads/)
 
 
