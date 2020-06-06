@@ -1,22 +1,32 @@
-import { makeExecutableSchema } from 'graphql-tools'
+import { makeExecutableSchema } from 'graphql-tools';
 import { gql } from 'apollo-server'
+import argon2 from 'argon2';
 
 const typeDefs = gql`
-  # This "Book" type defines the queryable fields for every book in our data source.
   type Book {
     title: String
     author: String
   }
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
+  type User {
+    id: ID!
+    username: String!
+  }
+
+  type LoginResponse {
+    token: String
+    user: User
+  }
+
   type Query {
     books: [Book]
+    currentUser: User!
   }
 
   type Mutation {
     addBook(title: String!, author: String!): Book!
+    register(username: String!, password: String!): User!
+    login(username: String!, password: String!): LoginResponse!
   }
 `;
 
@@ -30,7 +40,12 @@ const resolvers = {
         title: args.title,
         author: args.author,
       },
-    })
+    }),
+    register: async (parent, { username, password }, ctx) => {
+      const hashedPassword = await argon2.hash(password);
+      const data = { username, password: hashedPassword };
+      return ctx.prisma.user.create({ data });
+    },
   }
 };
 
