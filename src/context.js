@@ -6,4 +6,5 @@ function createContext() {
   return { prisma }
 }
 
-export default createContext
+export default createContext;
+export { prisma };

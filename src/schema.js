@@ -33,22 +33,26 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    books: (parent, args, ctx) => ctx.prisma.book.findMany(),
+    books: (parent, args, { prisma }) => prisma.book.findMany(),
+    currentUser: (parent, args, { user, prisma }) => {
+      if (!user) throw new Error('Not authenticated')
+      return prisma.user.findOne({ where: { id: user.id } })
+    }
   },
   Mutation: {
-    addBook: (parent, args, ctx) => ctx.prisma.book.create({
+    addBook: (parent, args, { prisma }) => prisma.book.create({
       data: {
         title: args.title,
         author: args.author,
       },
     }),
-    register: async (parent, { username, password }, ctx) => {
+    register: async (parent, { username, password }, { prisma }) => {
       const hashedPassword = await argon2.hash(password);
       const data = { username, password: hashedPassword };
-      return ctx.prisma.user.create({ data });
+      return prisma.user.create({ data });
     },
-    login: async (parent, { username, password }, ctx) => {
-      const user = await ctx.prisma.user.findOne({ where: { username } });
+    login: async (parent, { username, password }, { prisma }) => {
+      const user = await prisma.user.findOne({ where: { username } });
       if (!user) throw new Error('Invalid username');
 
       const passwordMatch = await argon2.verify(user.password, password);
