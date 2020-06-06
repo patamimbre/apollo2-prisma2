@@ -29,7 +29,6 @@ const typeDefs = gql`
 const resolvers = {
   Query: {
     currentUser: (parent, args, { user, prisma }) => {
-      if (!user) throw new AuthenticationError()
       return prisma.user.findOne({ where: { id: user.id } })
     }
   },

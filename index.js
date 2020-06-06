@@ -1,10 +1,12 @@
 import { ApolloServer } from 'apollo-server';
+import { applyMiddleware } from "graphql-middleware";
 
 import schema from './src/schemas'
 import context from './src/context'
+import permissions from './src/permissions'
 
 const server = new ApolloServer({
-  schema,
+  schema: applyMiddleware(schema, permissions),
   context,
 });
 

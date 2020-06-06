@@ -9,6 +9,10 @@
 ## 03 - Authentication
 - [Documentation](https://www.prisma.io/tutorials/authentication-in-apollo-server-ct21)
 
+## Authorization
+- [GraphQL Shield](https://medium.com/@maticzav/graphql-shield-9d1e02520e35)
+- [Repo](https://github.com/maticzav/graphql-shield)
+
 ## Custom scalars and enums
 - [Documentation](https://www.apollographql.com/docs/apollo-server/schema/scalars-enums/)
 
