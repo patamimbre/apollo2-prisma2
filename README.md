@@ -7,7 +7,7 @@
 
 
 ## 03 - Authentication
-
+- [Documentation](https://www.prisma.io/tutorials/authentication-in-apollo-server-ct21)
 
 ## Custom scalars and enums
 - [Documentation](https://www.apollographql.com/docs/apollo-server/schema/scalars-enums/)
