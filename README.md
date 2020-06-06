@@ -15,6 +15,7 @@
 
 ## Error handling
 [Documentation](https://www.apollographql.com/docs/apollo-server/data/errors/)
+[Better approach](https://dev.to/andre/handling-errors-in-graphql--2ea3)
 
 
 ## File uploads
