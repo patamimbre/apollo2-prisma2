@@ -7,7 +7,8 @@
     "start": "node index.js",
     "migrate:save": "npx prisma migrate save --experimental",
     "migrate:up": "npx prisma migrate up --experimental",
-    "generate": "npx prisma generate"
+    "generate": "npx prisma generate",
+    "studio": "npx prisma studio --experimental"
   },
   "keywords": [],
   "author": "",
