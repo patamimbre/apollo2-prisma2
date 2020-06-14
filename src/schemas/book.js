@@ -10,7 +10,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    books: [Book]
+    books(take:Int, skip:Int): [Book]!
   }
 
   type Mutation {
@@ -20,7 +20,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    books: (parent, args, { prisma }) => prisma.book.findMany(),
+    books: (parent, { take, skip }, { prisma }) => prisma.book.findMany({ skip, take }),
   },
   Mutation: {
     addBook: (parent, args, { prisma }) => prisma.book.create({
